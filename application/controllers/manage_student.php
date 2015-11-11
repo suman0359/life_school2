@@ -31,6 +31,21 @@ class Manage_student extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function student_list() {
+        $data['title'] = 'Student List';
+
+        $data['class_list'] = $this->creation_model->class_list();
+        $data['shift_list'] = $this->creation_model->shift_list();
+        $data['section_list'] = $this->creation_model->section_list();
+        
+        $data['student_list'] = $this->manage_student_model->getAll('student');
+        
+        $this->load->view('header', $data);
+        $this->load->view('sidemenu');
+        $this->load->view('student_list', $data);
+        $this->load->view('footer');
+    }
+
     public function create_student() {
 
         $data['title'] = 'Create student';

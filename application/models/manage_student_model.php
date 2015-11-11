@@ -11,6 +11,17 @@ class Manage_student_model extends CI_Model {
         }
     }
 
+    // Get All Data by Table and Order Peramiter 
+    public function getAll($table_name,$order=NULL){
+        $this->db->where('status !=', 0);
+        if(!($order==NULL))
+        {
+            $this->db->order_by($order);
+        }
+        $query = $this->db->get($table_name)->result_array();
+        return $query ;
+    }
+
     public function student_list($school_code) {
         $this->db->where('student.school_code', $school_code);
         $query = $this->db->get('student');
